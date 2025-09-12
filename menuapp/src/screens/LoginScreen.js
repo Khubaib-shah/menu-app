@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }) {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = () => {
-    navigation.replace("Main");
+    navigation.replace("Home");
   };
 
   return (
@@ -90,11 +90,7 @@ export default function LoginScreen({ navigation }) {
                 <Text style={styles.rememberText}>Remember Me</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={() => navigation.navigate("ForgotPassword")}
-              >
-                <Text style={styles.forgotText}>Forgot Password?</Text>
-              </TouchableOpacity>
+              <View />
             </View>
 
             <TouchableOpacity style={styles.primaryButton} onPress={handleLogin}>

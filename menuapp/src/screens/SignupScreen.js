@@ -24,7 +24,7 @@ export default function SignupScreen({ navigation }) {
 
   const handleSignup = () => {
     // signup logic here
-    navigation.replace("Main");
+    navigation.replace("Home");
   };
 
   return (
