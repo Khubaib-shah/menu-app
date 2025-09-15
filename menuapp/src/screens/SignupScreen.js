@@ -14,6 +14,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import CustomInput from "../components/CustomInput";
+import CustomButton from "../components/CustomButton";
 
 export default function SignupScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -54,54 +56,39 @@ export default function SignupScreen({ navigation }) {
               </View>
 
               {/* Inputs */}
-              <TextInput
+              <CustomInput
                 placeholder="Enter Your Username"
-                style={styles.input}
                 value={username}
                 onChangeText={setUsername}
               />
-              <TextInput
+              <CustomInput
                 placeholder="Enter Your Email"
-                style={styles.input}
-                autoCapitalize="none"
-                keyboardType="email-address"
                 value={email}
                 onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
               />
-              <TextInput
+              <CustomInput
                 placeholder="Enter Your Phone Number"
-                style={styles.input}
-                keyboardType="phone-pad"
                 value={phone}
                 onChangeText={setPhone}
+                keyboardType="phone-pad"
               />
-              <View style={styles.passwordContainer}>
-                <TextInput
-                  placeholder="Enter Your Password"
-                  style={styles.passwordInput}
-                  secureTextEntry={secureText}
-                  value={password}
-                  onChangeText={setPassword}
-                />
-                <TouchableOpacity
-                  onPress={() => setSecureText(!secureText)}
-                  style={styles.eyeIcon}
-                >
-                  <Ionicons
-                    name={secureText ? "eye-off" : "eye"}
-                    size={20}
-                    color="#666"
-                  />
-                </TouchableOpacity>
-              </View>
+              <CustomInput
+                placeholder="Enter Your Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={secureText}
+                showPasswordToggle={true}
+                onTogglePassword={() => setSecureText(!secureText)}
+              />
 
               {/* Sign Up Button */}
-              <TouchableOpacity
-                style={styles.primaryButton}
+              <CustomButton
+                title="Sign Up"
                 onPress={handleSignup}
-              >
-                <Text style={styles.btnText}>Sign Up</Text>
-              </TouchableOpacity>
+                variant="primary"
+              />
 
               {/* Already have an account */}
               <View style={styles.row}>
@@ -153,37 +140,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 
-  input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 12,
-    backgroundColor: "#fafafa",
-  },
-
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 8,
-    marginBottom: 12,
-    paddingRight: 10,
-    backgroundColor: "#fafafa",
-  },
-  passwordInput: { flex: 1, padding: 12 },
-  eyeIcon: { padding: 8 },
-
-  // Button
-  primaryButton: {
-    backgroundColor: "#e63946",
-    padding: 14,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 8,
-  },
-  btnText: { color: "#fff", fontWeight: "700", fontSize: 16 },
 
   // Footer
   row: { flexDirection: "row", justifyContent: "center", marginTop: 20 },

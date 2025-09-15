@@ -13,6 +13,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import CustomInput from "../components/CustomInput";
+import CustomButton from "../components/CustomButton";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -43,36 +45,24 @@ export default function LoginScreen({ navigation }) {
               <Text style={styles.title}>Discover Karachi Resturant’s Menu</Text>
             </View>
 
-            <Text style={styles.label}>Email</Text>
-            <TextInput
+            <CustomInput
+              label="Email"
               placeholder="example@email.com"
-              style={styles.input}
-              autoCapitalize="none"
-              keyboardType="email-address"
               value={email}
               onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
 
-            <Text style={styles.label}>Password</Text>
-            <View style={styles.passwordContainer}>
-              <TextInput
-                placeholder="Enter your password"
-                style={styles.passwordInput}
-                secureTextEntry={secureText}
-                value={password}
-                onChangeText={setPassword}
-              />
-              <TouchableOpacity
-                onPress={() => setSecureText(!secureText)}
-                style={styles.eyeIcon}
-              >
-                <Ionicons
-                  name={secureText ? "eye-off" : "eye"}
-                  size={20}
-                  color="#666"
-                />
-              </TouchableOpacity>
-            </View>
+            <CustomInput
+              label="Password"
+              placeholder="Enter your password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={secureText}
+              showPasswordToggle={true}
+              onTogglePassword={() => setSecureText(!secureText)}
+            />
 
             {/* Remember Me + Forgot Password */}
             <View style={styles.optionsRow}>
@@ -93,9 +83,11 @@ export default function LoginScreen({ navigation }) {
               <View />
             </View>
 
-            <TouchableOpacity style={styles.primaryButton} onPress={handleLogin}>
-              <Text style={styles.btnText}>Login</Text>
-            </TouchableOpacity>
+            <CustomButton
+              title="Login"
+              onPress={handleLogin}
+              variant="primary"
+            />
 
             <View style={styles.row}>
               <Text>Don't have an account? </Text>
@@ -134,28 +126,6 @@ const styles = StyleSheet.create({
   },
     
   title: { fontSize: 18, textAlign: "center", marginTop: 4, color: "#000000B2", },
-  label: { fontSize: 14, fontWeight: "600", marginBottom: 6, marginTop: 12 },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-    backgroundColor: "#fafafa",
-  },
-
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 8,
-    marginBottom: 8,
-    paddingRight: 10,
-    backgroundColor: "#fafafa",
-  },
-  passwordInput: { flex: 1, padding: 12 },
-  eyeIcon: { padding: 8 },
 
   optionsRow: {
     flexDirection: "row",
@@ -179,14 +149,6 @@ const styles = StyleSheet.create({
   rememberText: { marginLeft: 6, fontSize: 13, color: "#333" },
   forgotText: { color: "#e63946", fontWeight: "600", fontSize: 13 },
 
-  primaryButton: {
-    backgroundColor: "#e63946",
-    padding: 14,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 8,
-  },
-  btnText: { color: "#fff", fontWeight: "700", fontSize: 16 },
 
   row: { flexDirection: "row", justifyContent: "center", marginTop: 20 },
   signupText: { color: "#e63946", fontWeight: "700" },

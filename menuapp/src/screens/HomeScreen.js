@@ -14,6 +14,9 @@ import {
   StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import RestaurantCard from "../components/RestaurantCard";
+import SearchInput from "../components/SearchInput";
+import SectionHeader from "../components/SectionHeader";
 
 const TOP_PICKS = [
   { id: "1", name: "Chicken Biryani", image: require("../../assets/sample/restaurant1.png") },
@@ -36,22 +39,12 @@ export default function HomeScreen({ navigation }) {
   const topInset = Platform.OS === 'android' ? (StatusBar.currentHeight || 0) : 0;
 
   const renderRestaurant = ({ item }) => (
-    <TouchableOpacity style={[styles.card, { width: width * 0.75 }]} onPress={() => navigation.navigate("RestaurantDetail", { item })}> 
-      <Image source={item.image} style={styles.cardImage} resizeMode="cover" />
-      <View style={styles.cardBody}>
-        <Text style={styles.cardTitle}>{item.name}</Text>
-        <Text style={styles.cardSubtitle}>{item.cuisine}</Text>
-        <View style={styles.cardFooterRow}>
-          <Text style={styles.cardRating}>★ {item.rating}</Text>
-          <TouchableOpacity
-            style={styles.locationBtn}
-            onPress={() => navigation.navigate("Location", { restaurant: item })}
-          >
-            <Text style={styles.locationText}>View Location</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableOpacity>
+    <RestaurantCard
+      item={item}
+      width={width * 0.75}
+      onPress={() => navigation.navigate("RestaurantDetail", { item })}
+      onLocationPress={() => navigation.navigate("Location", { restaurant: item })}
+    />
   );
 
   return (
@@ -70,15 +63,11 @@ export default function HomeScreen({ navigation }) {
           />
         </View>
         <View style={styles.searchRow}>
-          <View style={styles.searchContainer}>
-            <Ionicons name="search-outline" size={18} color="#E63946" style={styles.searchIconIcon} />
-            <TextInput
-              placeholder="Search"
-              placeholderTextColor="#6B7280"
-              style={styles.searchInput}
-              onFocus={() => navigation.navigate("Search")}
-            />
-          </View>
+          <SearchInput
+            placeholder="Search"
+            onFocus={() => navigation.navigate("Search")}
+            containerStyle={styles.searchContainer}
+          />
           <View style={styles.rightColumn}>
             <TouchableOpacity style={styles.actionBtn}>
               <Ionicons name="options-outline" size={20} color="#fff" />
@@ -88,7 +77,7 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       {/* Top Picks */}
-      <Text style={styles.sectionTitle}>Top Picks</Text>
+      <SectionHeader title="Top Picks" showSeeAll={false} />
       <FlatList
         data={TOP_PICKS}
         horizontal
@@ -107,7 +96,7 @@ export default function HomeScreen({ navigation }) {
       />
 
       {/* Nearby Restaurants */}
-      <Text style={styles.sectionTitle}>Near by me</Text>
+      <SectionHeader title="Near by me" showSeeAll={false} />
       <FlatList
         data={RESTAURANTS}
         horizontal
@@ -119,7 +108,7 @@ export default function HomeScreen({ navigation }) {
       />
 
       {/* Recommended Section */}
-      <Text style={[styles.sectionTitle, { marginTop: 1 }]}>Top Recommended</Text>
+      <SectionHeader title="Top Recommended" showSeeAll={false} containerStyle={{ marginTop: 1 }} />
       <FlatList
         data={RESTAURANTS}
         horizontal
@@ -165,20 +154,9 @@ const styles = StyleSheet.create({
   searchRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 16, marginTop: 6 },
   searchContainer: {
     flex: 1,
-    // width: undefined,
-    flexDirection: "row",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderWidth: 1,
-    borderColor: "#E3E5E8",
-    height: 40,
     marginRight: 12,
   },
   rightColumn: { alignItems: "flex-end", justifyContent: "center" },
-  searchIconIcon: { marginRight: 8 },
-  searchInput: { flex: 1, color: "#111", fontSize: 16, paddingTop: 0, paddingBottom: 0, includeFontPadding: false, textAlignVertical: 'center' },
   actionBtn: {
     width: 40,
     height: 40,
@@ -189,7 +167,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   actionBtnText: { color: "#fff", fontSize: 18, fontWeight: "700" },
-  sectionTitle: { fontSize: 18, fontWeight: "700", marginHorizontal: 16, marginTop: 12, marginBottom: 8 },
   topPickItem: { alignItems: "center", width: 72 },
   topPickCard: {
     backgroundColor: "#fff",
@@ -199,25 +176,4 @@ const styles = StyleSheet.create({
   },
   topPickImage: { width: 62, height: 62, borderRadius: 50 },
   topPickLabel: { marginTop: 6, fontSize: 11, color: "#7A7A7A", textAlign: "center" },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    overflow: "hidden",
-    marginVertical: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  cardImage: { width: "100%", height: 170 },
-  cardBody: { padding: 12 },
-  cardTitle: { fontSize: 16, fontWeight: "700" },
-  cardSubtitle: { color: "#666", marginTop: 4, fontSize: 13 },
-  cardFooterRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 8 },
-  cardRating: { fontWeight: "700", color: "#E63946" },
-  locationBtn: {
-    backgroundColor: "#E63946",
-    borderRadius: 20,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-  },
-  locationText: { color: "#fff", fontSize: 12 },
 });
