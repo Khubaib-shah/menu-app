@@ -10,6 +10,8 @@ import MainCourseScreen from "../screens/MainCourseScreen";
 import StartersScreen from "../screens/StartersScreen";
 import SearchScreen from "../screens/SearchScreen";
 import MenuScreen from "../screens/MenuScreen";
+import LocationScreen from "../screens/LocationScreen";
+import ReviewsScreen from "../screens/ReviewsScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +29,8 @@ return (
 <Stack.Screen name="Starters" component={StartersScreen} />
 <Stack.Screen name="Search" component={SearchScreen} />
 <Stack.Screen name="Menu" component={MenuScreen} />
+<Stack.Screen name="Location" component={LocationScreen} />
+<Stack.Screen name="Reviews" component={ReviewsScreen} />
 </Stack.Navigator>
 );
 }
