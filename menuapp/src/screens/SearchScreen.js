@@ -19,9 +19,9 @@ export default function SearchScreen({ navigation }) {
     <SafeAreaView style={[styles.container, { paddingTop: topInset }]}> 
       {/* Header */}
       <View style={styles.headerRow}>
-        <View style={{ width: 46 }}>
+        <View style={{ width: 28 }}>
           <TouchableOpacity style={styles.backPill} onPress={() => navigation.goBack()}>
-            <Ionicons name="chevron-back" size={17} color="#333" />
+            <Ionicons name="chevron-back" size={18} color="#333" />
           </TouchableOpacity>
         </View>
         <Text style={styles.headerTitle}>Search</Text>
@@ -95,7 +95,12 @@ export default function SearchScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#FFFFFF" },
   headerRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 16, paddingTop: 8, paddingBottom: 8, height: 49 },
-  backPill: { width: 46, height: 45, borderRadius: 50, backgroundColor: "#EEF1F4", alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: '#E3E5E8' },
+  backPill: { width: 28,
+    height: 28,
+    borderRadius: 16,
+    backgroundColor: "#eef1f4",
+    alignItems: "center",
+    justifyContent: "center", },
   headerTitle: { fontWeight: "600", flex: 1, textAlign: 'center' },
   avatar: { width: 40, height: 40, borderRadius: 32, borderWidth: 1, borderColor: '#E3E5E8' },
   searchBox: {

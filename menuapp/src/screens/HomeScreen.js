@@ -43,7 +43,10 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.cardSubtitle}>{item.cuisine}</Text>
         <View style={styles.cardFooterRow}>
           <Text style={styles.cardRating}>★ {item.rating}</Text>
-          <TouchableOpacity style={styles.locationBtn}>
+          <TouchableOpacity
+            style={styles.locationBtn}
+            onPress={() => navigation.navigate("Location", { restaurant: item })}
+          >
             <Text style={styles.locationText}>View Location</Text>
           </TouchableOpacity>
         </View>
